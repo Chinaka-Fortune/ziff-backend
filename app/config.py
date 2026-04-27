@@ -16,7 +16,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard-to-guess-string'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY') or 'jwt-secret-string'
-    UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
+    UPLOAD_FOLDER = '/tmp/uploads' if os.environ.get('VERCEL') else os.path.join(os.getcwd(), 'uploads')
     MAX_CONTENT_LENGTH = 5 * 1024 * 1024 # 5MB limit
 
 class DevelopmentConfig(Config):

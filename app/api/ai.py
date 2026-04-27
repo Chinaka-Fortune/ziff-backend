@@ -14,19 +14,8 @@ from datetime import datetime
 ai_bp = Blueprint('ai', __name__)
 
 def log_ai_error(error_type, message):
-    """Telemetry for synchronization bottlenecks"""
-    log_dir = 'logs'
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-    
-    log_file = os.path.join(log_dir, 'ai_errors.log')
-    error_entry = {
-        "timestamp": datetime.now().isoformat(),
-        "type": str(error_type),
-        "message": str(message)
-    }
-    with open(log_file, 'a') as f:
-        f.write(json.dumps(error_entry) + "\n")
+    """Telemetry redirected to console for cloud compatibility"""
+    print(f"ZIFFIE AI SYNC ERROR [{error_type}]: {message}")
 
 @ai_bp.route('/ask', methods=['POST'])
 @jwt_required()

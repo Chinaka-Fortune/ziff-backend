@@ -44,10 +44,13 @@ def create_app(config_name='default'):
     app.register_blueprint(governance_bp, url_prefix='/api/governance')
     app.register_blueprint(admin_access_bp, url_prefix='/api/admin-access')
 
-    # Ensure the upload directory exists
-    if not os.path.exists(app.config['UPLOAD_FOLDER']):
-        os.makedirs(app.config['UPLOAD_FOLDER'])
-        os.makedirs(os.path.join(app.config['UPLOAD_FOLDER'], 'profile_pics'))
+    # Ensure the upload directory exists (handle read-only filesystem on Vercel)
+    try:
+        if not os.path.exists(app.config['UPLOAD_FOLDER']):
+            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+            os.makedirs(os.path.join(app.config['UPLOAD_FOLDER'], 'profile_pics'), exist_ok=True)
+    except OSError:
+        pass # Vercel read-only filesystem
 
     # Route to serve uploaded files
     @app.route('/uploads/<path:filename>')

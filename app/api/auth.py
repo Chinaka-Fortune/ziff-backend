@@ -28,10 +28,9 @@ def forgot_password():
     user.reset_token_expiry = datetime.now(timezone.utc) + timedelta(hours=1)
     db.session.commit()
 
-    # SIMULATION: Log reset link
-    reset_link = f"http://localhost:3000/reset-password?token={token}"
-    with open('backend.log', 'a') as f:
-        f.write(f"\n[{datetime.now()}] PASSWORD RESET LINK: {reset_link}\n")
+    # SIMULATION: Log reset link (In production, this should be sent via email)
+    reset_link = f"https://www.ziffcode.com.ng/reset-password?token={token}"
+    print(f"PASSWORD RESET LINK: {reset_link}")
 
     return jsonify(success_msg), 200
 
