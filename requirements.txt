@@ -5,6 +5,7 @@ Flask-JWT-Extended==4.5.3
 Flask-Cors==4.0.0
 python-dotenv==1.0.0
 psycopg[binary]
+psycopg2-binary
 pytest==7.4.3
 stripe
 requests

@@ -60,6 +60,11 @@ def create_app(config_name='default'):
     # Simple health check route
     @app.route('/health')
     def health_check():
-        return {'status': 'ok', 'message': 'Ziffcode API is running'}
+        try:
+            from sqlalchemy import text
+            db.session.execute(text('SELECT 1'))
+            return {'status': 'ok', 'message': 'Ziffcode API is running and DB is connected'}
+        except Exception as e:
+            return {'status': 'error', 'message': str(e)}, 500
 
     return app

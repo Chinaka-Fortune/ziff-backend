@@ -7,9 +7,12 @@ def get_db_uri(env_var):
     url = os.environ.get(env_var)
     if url:
         if url.startswith("postgres://"):
-            url = url.replace("postgres://", "postgresql+psycopg://", 1)
-        elif url.startswith("postgresql://"):
-            url = url.replace("postgresql://", "postgresql+psycopg://", 1)
+            url = url.replace("postgres://", "postgresql://", 1)
+        
+        # Ensure SSL mode for Supabase/Cloud DBs
+        if "sslmode=" not in url:
+            separator = "&" if "?" in url else "?"
+            url += f"{separator}sslmode=require"
     return url
 
 class Config:
