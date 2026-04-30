@@ -11,5 +11,6 @@ from app.models.communication import SupportThread, SupportMessage, HubPost, Hub
 from app.models.course_note import CourseNote
 from app.models.project import Project
 from app.models.lesson import Lesson
+from app.models.meeting import Meeting, MeetingParticipant
 
-__all__ = ['User', 'Course', 'Enrollment', 'Post', 'Inquiry', 'Payment', 'LiveClass', 'Certificate', 'ActivityLog', 'CourseNote', 'Project', 'Lesson']
+__all__ = ['User', 'Course', 'Enrollment', 'Post', 'Inquiry', 'Payment', 'LiveClass', 'Certificate', 'ActivityLog', 'SupportThread', 'SupportMessage', 'HubPost', 'HubComment', 'CourseNote', 'Project', 'Lesson', 'Meeting', 'MeetingParticipant']

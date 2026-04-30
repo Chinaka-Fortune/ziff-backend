@@ -57,6 +57,11 @@ def create_app(config_name='default'):
     def uploaded_file(filename):
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+    # Root route for Vercel overview
+    @app.route('/')
+    def index():
+        return {'status': 'ok', 'message': 'Ziffcode API is running. Visit /health for more details.'}
+
     # Simple health check route
     @app.route('/health')
     def health_check():
