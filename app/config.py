@@ -6,6 +6,10 @@ load_dotenv()
 def get_db_uri(env_var):
     url = os.environ.get(env_var)
     if url:
+        # Fix unencoded special characters in the known password
+        if "Fort_9487##@" in url:
+            url = url.replace("Fort_9487##@", "Fort_9487%23%23%40")
+            
         if url.startswith("postgres://"):
             url = url.replace("postgres://", "postgresql://", 1)
         
